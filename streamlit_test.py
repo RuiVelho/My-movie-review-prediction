@@ -29,7 +29,7 @@ st.set_page_config(page_title='Prediction of Futeture Movies',
 
 dash = st.sidebar.radio(
     "Prediction of review for the future Movies",
-    ('Titles Sentiment Analysis', 'Movies Statistics', 'How good will your movie be?'))
+    ('Titles Sentiment Analysis', 'Movies Statistics', 'Actors', 'How good will your movie be?'))
 
 if dash == 'Titles Sentiment Analysis':
     st.title('Titles Sentiment Analysis')
@@ -49,8 +49,15 @@ if dash == 'Movies Statistics':
     st.title('Genres Analysis')
     genres_analysis
 
-if dash == "actors":
-    actors
+if dash == "Actors":
+    col1, col2 = st.columns(2)
+    with col1:
+        st.title('Top Actors')
+        
+    
+    with col2:
+        st.title('Worst Actors')
+        
 #if dash == 'How good will your movie be?':
 
     #st.title('Prediction of review for the future Movies')
