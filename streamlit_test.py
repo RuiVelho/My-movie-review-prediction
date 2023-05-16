@@ -12,13 +12,15 @@ dir_names_df = pd.read_csv("https://raw.githubusercontent.com/RuiVelho/My-movie-
 dir_names = dir_names_df.columns.drop('tconst').tolist()
 #dir dataframes
 directors=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/imbdir_rating.csv')
-directors1=directors.sort_values(by="dir_rating", ascending=False).head(10)
+directors1=directors.sort_values(by="dir_rating", ascending=False)
 directors1=directors1.reset_index()
 directors1=directors1.drop(['index'], axis=1)
+directors1= directors1[directors1["dir_rating"] > directors["dir_rating"].mean()]
 
-directorslow = directors.sort_values(by="dir_rating", ascending=True).head(10)
+directorslow = directors.sort_values(by="dir_rating", ascending=True)
 directorslow=directorslow.reset_index()
 directorslow=directorslow.drop(['index'], axis=1)
+directorslow= directorslow[directorslow["dir_rating"] < directors["dir_rating"].mean()]
 actors=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/actors_top10.csv')
 table_actor_10_top = pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/table_actor_10.csv')
 table_actor_10_tail = pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/table_actor_10_tail.csv')
@@ -43,13 +45,14 @@ if dash == 'Movies Statistics':
     with col1:
         st.title('Top Directors')
         directors1
-    
+    st.write("Average Director Rating: ", directors["dir_rating"].mean())
     with col2:
         st.title('Worst Directors')
         directorslow
-    
-    st.title('Genres Analysis')
+    st.title('Genres Ratings')
+    genres_analysis = genres_analysis.sort_values(by="count", ascending=False)
     genres_analysis
+    st.write("Average Genre Rating", genres_analysis["Count_Rating"].mean())
 
 if dash == "Actors":
     st.title('Top Actors')
