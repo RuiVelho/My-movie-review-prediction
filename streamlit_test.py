@@ -56,10 +56,19 @@ if dash == 'Movies Statistics':
 
 if dash == "Actors":
     st.title('Top Actors')
-    table_actor_10_top
+    counts = table_actor_10_top.primaryName.value_counts()
+    fig1, ax1 = plt.subplots()
+    ax1.pie(counts, labels=counts.index, autopct='%1.1f%%')
+    ax1.axis('equal')
+    st.pyplot(fig1)
     
     st.title('Worst Actors')
-    table_actor_10_tail
+    counts2 = table_actor_10_tail.primaryName.value_counts()
+    fig2, ax2 = plt.subplots()
+    ax2.pie(counts2, labels=counts2.index, autopct='%1.1f%%')
+    ax2.axis('equal')
+    st.pyplot(fig2)
+
 
 #if dash == 'How good will your movie be?':
 
