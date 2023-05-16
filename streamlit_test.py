@@ -20,6 +20,8 @@ directorslow = directors.sort_values(by="dir_rating", ascending=True).head(10)
 directorslow=directorslow.reset_index()
 directorslow=directorslow.drop(['index'], axis=1)
 actors=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/actors_top10.csv')
+table_actor_10_top = pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/table_actor_10.csv')
+table_actor_10_tail = pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/table_actor_10_tail.csv')
 
 genres_analysis=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/genres_analysis.csv')
 
@@ -50,14 +52,12 @@ if dash == 'Movies Statistics':
     genres_analysis
 
 if dash == "Actors":
-    col1, col2 = st.columns(2)
-    with col1:
-        st.title('Top Actors')
-        
+    st.title('Top Actors')
+    table_actor_10_top
     
-    with col2:
-        st.title('Worst Actors')
-        
+    st.title('Worst Actors')
+    table_actor_10_tail
+
 #if dash == 'How good will your movie be?':
 
     #st.title('Prediction of review for the future Movies')
