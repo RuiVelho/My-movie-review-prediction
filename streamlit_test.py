@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 titles=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/movies_noexplode.csv') #Sentiment analysis
-tiltes1=titles.drop(['index'], axis=1)['tconst', 'primaryTitle', 'genres', 'compound']
+tiltes1=titles.drop(['titleType','originalTitle','isAdult','endYear','runtimeMinutes','numVotes','Titles'], axis=1)#['tconst', 'primaryTitle', 'genres', 'compound']
 #getting dir names
 dir_names_df = pd.read_csv("https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/pivot_dir.csv")
 #getting the dir list
@@ -33,7 +33,7 @@ dash = st.sidebar.radio(
 
 if dash == 'Titles Sentiment Analysis':
     st.title('Titles Sentiment Analysis')
-    titles
+    tiltes1
     
 
 if dash == 'Movies Statistics':
