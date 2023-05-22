@@ -3,6 +3,7 @@ import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from wordcloud import WordCloud
 
 titles=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/movies_noexplode.csv') #Sentiment analysis
 tiltes1=titles.drop(['titleType','originalTitle','isAdult','endYear','runtimeMinutes','numVotes','Titles'], axis=1)#['tconst', 'primaryTitle', 'genres', 'compound']
@@ -28,13 +29,15 @@ table_actor_10_tail = pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My
 
 genres_analysis=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/genres_analysis.csv')
 
+words=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/genres_2205.csv')
+
 
 st.set_page_config(page_title='Prediction of Futeture Movies',
                    page_icon=":movie_camera:")
 
 dash = st.sidebar.radio(
     "Prediction of review for the future Movies",
-    ('Titles Sentiment Analysis', 'Movies Statistics', 'Actors'))
+    ('Titles Sentiment Analysis', 'Movies Statistics', 'Actors', 'Most common words in the Titles in each Category'))
 
 if dash == 'Titles Sentiment Analysis':
     st.title('Titles Sentiment Analysis')
@@ -69,6 +72,19 @@ if dash == "Actors":
     ax2.pie(counts2, labels=counts2.index, autopct='%1.1f%%')
     ax2.axis('equal')
     st.pyplot(fig2)
+    
+if dash == 'Most common words in the Titles in each Category':
+    category = st.sidebar.radio("Select the Category:", 
+    options=words['genre'])
+    
+    wordcloud = WordCloud(width=480, height=480, max_font_size=200, min_font_size=10, background_color = 'white')
+    
+    wordcloud.generate_from_frequencies(dict(words[words['genre']==words['genre'].iloc[0]]['count words'][0]))
+    plt.figure()
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.margins(x=0, y=0)
+    plt.show()
 
 
 #if dash == 'How good will your movie be?':
