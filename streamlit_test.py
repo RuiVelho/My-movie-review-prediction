@@ -31,6 +31,36 @@ genres_analysis=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie
 
 words=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/genres_2205.csv')
 
+action=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Action.csv')
+adult=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Adult.csv')
+adventure=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Adventure.csv')
+animation=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Animation.csv')
+biog=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Biography.csv')
+comedy=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Comedy.csv')
+crime=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Crime.csv')
+documentary=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Documentary.csv')
+drama=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Drama.csv')
+family=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Family.csv')
+fantasy=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Fantasy.csv')
+filmnoir=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Film-Noir.csv')
+game=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Game-Show.csv')
+history=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/History.csv')
+horror=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Horror.csv')
+music=pd.read_csv('https://github.com/RuiVelho/My-movie-review-prediction/blob/main/Music.csv')
+musical=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Musical.csv')
+mystery=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Mystery.csv')
+news=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/News.csv')
+reality=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Reality-TV.csv')
+romance=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Romance.csv')
+scifi=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Sci-Fi.csv')
+short=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Short.csv')
+sports=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Sport.csv')
+talk=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Talk-Show.csv')
+thriller=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Thriller.csv')
+war=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/War.csv')
+western=pd.read_csv('https://raw.githubusercontent.com/RuiVelho/My-movie-review-prediction/main/Western.csv')
+
+
 
 st.set_page_config(page_title='Prediction of Futeture Movies',
                    page_icon=":movie_camera:")
@@ -76,16 +106,212 @@ if dash == "Actors":
 if dash == 'Most common words in the Titles in each Category':
     category = st.sidebar.radio("Select the Category:", 
     options=words['genre'])
+    if category == words['genre'].iloc[0]:
+        st.subheader('Most Common Words in Titles of Drama Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            drama_counts = dict(zip(drama['words'], drama['count']))
+            wordcloud = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud.generate_from_frequencies(drama_counts)
+            plt.figure()
+            plt.imshow(wordcloud, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud.png")
+            st.image("wordcloud.png")
+        
+        with col2:
+            drama
+            
     
-    wordcloud = WordCloud(width=480, height=480, max_font_size=200, min_font_size=10, background_color = 'white')
+     if category == words['genre'].iloc[1]:
+        st.subheader('Most Common Words in Titles of Comedy Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            comedy_counts = dict(zip(comedy['words'], comedy['count']))
+            wordcloud1 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud1.generate_from_frequencies(comedy_counts)
+            plt.figure()
+            plt.imshow(wordcloud1, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud1.png")
+            st.image("wordcloud1.png")
+        
+        with col2:
+            comedy
+            
+    if category == words['genre'].iloc[2]:
+        st.subheader('Most Common Words in Titles of Action Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            action_counts = dict(zip(action['words'], action['count']))
+            wordcloud2 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud2.generate_from_frequencies(action_counts)
+            plt.figure()
+            plt.imshow(wordcloud2, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud2.png")
+            st.image("wordcloud2.png")
+        
+        with col2:
+            action
     
-    wordcloud.generate_from_frequencies(dict(words[words['genre']==words['genre'].iloc[0]]['count words'][0]))
-    plt.figure()
-    plt.imshow(wordcloud, interpolation="bilinear")
-    plt.axis("off")
-    plt.margins(x=0, y=0)
-    plt.show()
+    if category == words['genre'].iloc[3]:
+        st.subheader('Most Common Words in Titles of Crime Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            crime_counts = dict(zip(crime['words'], crime['count']))
+            wordcloud3 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud3.generate_from_frequencies(crime_counts)
+            plt.figure()
+            plt.imshow(wordcloud3, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud3.png")
+            st.image("wordcloud3.png")
+        
+        with col2:
+            crime
+            
+    if category == words['genre'].iloc[4]:
+        st.subheader('Most Common Words in Titles of Adventure Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            adventure_counts = dict(zip(adventure['words'], adventure['count']))
+            wordcloud4 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud4.generate_from_frequencies(adventure_counts)
+            plt.figure()
+            plt.imshow(wordcloud4, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud4.png")
+            st.image("wordcloud4.png")
+        
+        with col2:
+            adventure
+            
+    if category == words['genre'].iloc[5]:
+        st.subheader('Most Common Words in Titles of Thriller Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            thriller_counts = dict(zip(thriller['words'], thriller['count']))
+            wordcloud5 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud5.generate_from_frequencies(thriller_counts)
+            plt.figure()
+            plt.imshow(wordcloud5, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud5.png")
+            st.image("wordcloud5.png")
+        
+        with col2:
+            thriller
+            
+    if category == words['genre'].iloc[6]:
+        st.subheader('Most Common Words in Titles of Romance Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            romance_counts = dict(zip(romance['words'], romance['count']))
+            wordcloud6 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud6.generate_from_frequencies(romance_counts)
+            plt.figure()
+            plt.imshow(wordcloud6, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud6.png")
+            st.image("wordcloud6.png")
+        
+        with col2:
+            romance
+            
+    if category == words['genre'].iloc[7]:
+        st.subheader('Most Common Words in Titles of Horror Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            horror_counts = dict(zip(horror['words'], horror['count']))
+            wordcloud7 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud7.generate_from_frequencies(horror_counts)
+            plt.figure()
+            plt.imshow(wordcloud7, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud7.png")
+            st.image("wordcloud7.png")
+        
+        with col2:
+            horror
+           
+    if category == words['genre'].iloc[8]:
+        st.subheader('Most Common Words in Titles of Mystery Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            mystery_counts = dict(zip(mystery['words'], mystery['count']))
+            wordcloud8 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud8.generate_from_frequencies(mystery_counts)
+            plt.figure()
+            plt.imshow(wordcloud8, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud8.png")
+            st.image("wordcloud8.png")
+        
+        with col2:
+            mystery
+            
+    if category == words['genre'].iloc[9]:
+        st.subheader('Most Common Words in Titles of Animation Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            animation_counts = dict(zip(animation['words'], animation['count']))
+            wordcloud9 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud9.generate_from_frequencies(animation_counts)
+            plt.figure()
+            plt.imshow(wordcloud9, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud9.png")
+            st.image("wordcloud9.png")
+        
+        with col2:
+            animation
+            
+    if category == words['genre'].iloc[10]:
+        st.subheader('Most Common Words in Titles of Fantasy Movies')
+        col1, col2 = st.columns(2)
+        with col1:
+            fantasy_counts = dict(zip(fantasy['words'], fantasy['count']))
+            wordcloud10 = WordCloud(width=700, height=700, max_font_size=300, min_font_size=20, background_color = 'white')
+            wordcloud10.generate_from_frequencies(fantasy_counts)
+            plt.figure()
+            plt.imshow(wordcloud10, interpolation="bilinear")
+            plt.axis("off")
+            plt.margins(x=0, y=0)
+            plt.savefig("wordcloud10.png")
+            st.image("wordcloud10.png")
+        
+        with col2:
+            fantasy
+            
+   
+    #st.write(words[words['genre']==category]['count words'][0])
+    #text=words[words['genre']==category]['count words'][0]
+   
+    #
+        #word_counts = dict(zip(data['palavras'], data['contagem']))
 
+        #words_filt= words[words['genre']==category]['count words'][0]
+        #words_filt=dict(words_filt)
+ 
+    #wordcloud = WordCloud(width=480, height=480, max_font_size=200, min_font_size=10, background_color = 'white')
+    
+    #viz1=wordcloud.generate_from_frequencies(dict(words[words['genre']==category]['count words'][0]))
+    #plt.figure()
+    #plt.imshow(wordcloud, interpolation="bilinear")
+    #plt.axis("off")
+    #plt.margins(x=0, y=0)
+    #plt.show(viz1.figure)
 
 #if dash == 'How good will your movie be?':
 
