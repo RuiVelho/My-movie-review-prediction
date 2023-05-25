@@ -70,7 +70,7 @@ dash = st.sidebar.radio(
 
 if dash == 'Titles Sentiment Analysis':
     st.title('Titles Sentiment Analysis')
-    st.dataframe(tiltes1, 100, 400)
+    st.dataframe(tiltes1)
     
     st.write("With this table we intend to analyse the impact of titles when the people are looking for a movie to watch. These analysis is done in based of the words that are in the titles.")
     st.write("We have 3 columns representing the scores of different feelings that each title can provoke. The column 'Pos' represents the positive sentiment score, the 'Neg'column represents the negative sentiment score and the 'Neu' column represents the Neutral sentiment score. The last column ('Compound')  represents the final sentiment analysis score for each title. The range of this column goes from -1 to 1, where negative values represent that the title has a negative impact, and positive values represent that the title has positive impact.")
